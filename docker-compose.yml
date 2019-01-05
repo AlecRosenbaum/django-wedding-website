@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+     - .:/code:cached
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    command: "bash -c 'while true; do sleep 30; done;'"

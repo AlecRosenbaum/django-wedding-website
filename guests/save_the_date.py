@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from __future__ import print_function
 from copy import copy
 from email.mime.image import MIMEImage
 import os
@@ -71,7 +72,7 @@ def send_save_the_date_to_party(party, test_only=False):
     context = get_save_the_date_context(get_template_id_from_party(party))
     recipients = party.guest_emails
     if not recipients:
-        print '===== WARNING: no valid email addresses found for {} ====='.format(party)
+        print('===== WARNING: no valid email addresses found for {} ====='.format(party))
     else:
         send_save_the_date_email(
             context,
@@ -88,7 +89,7 @@ def get_template_id_from_party(party):
         # all non-formal dimagis get dimagi invites
         return 'dimagi'
     elif party.type == 'fun':
-        all_options = SAVE_THE_DATE_CONTEXT_MAP.keys()
+        all_options = list(SAVE_THE_DATE_CONTEXT_MAP.keys())
         all_options.remove('dimagi')
         if party.category == 'ro':
             # don't send the canada invitation to ro's crowd
@@ -131,7 +132,7 @@ def send_save_the_date_email(context, recipients, test_only=False):
             msg_img.add_header('Content-ID', '<{}>'.format(filename))
             msg.attach(msg_img)
 
-    print 'sending {} to {}'.format(context['name'], ', '.join(recipients))
+    print('sending {} to {}'.format(context['name'], ', '.join(recipients)))
     if not test_only:
         msg.send()
 

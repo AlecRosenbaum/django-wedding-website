@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from builtins import str
 import datetime
 import uuid
 
@@ -51,7 +52,7 @@ class Party(models.Model):
 
     @property
     def guest_emails(self):
-        return filter(None, self.guest_set.values_list('email', flat=True))
+        return [_f for _f in self.guest_set.values_list('email', flat=True) if _f]
 
 
 MEALS = [
@@ -66,7 +67,7 @@ class Guest(models.Model):
     """
     A single guest
     """
-    party = models.ForeignKey(Party)
+    party = models.ForeignKey(Party, on_delete=models.CASCADE)
     first_name = models.TextField()
     last_name = models.TextField(null=True, blank=True)
     email = models.TextField(null=True, blank=True)
@@ -81,7 +82,7 @@ class Guest(models.Model):
     @property
     def unique_id(self):
         # convert to string so it can be used in the "add" templatetag
-        return unicode(self.pk)
+        return str(self.pk)
 
     def __unicode__(self):
         return 'Guest: {} {}'.format(self.first_name, self.last_name)

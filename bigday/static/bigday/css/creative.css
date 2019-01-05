@@ -131,7 +131,7 @@ aside {
 @media(min-width:768px) {
     .navbar-default {
         border-color: rgba(28,56,81,.3);
-        background-color: transparent;
+        background-color: #ffffffb8;
     }
 
     .navbar-default .navbar-header .navbar-brand {
@@ -193,7 +193,7 @@ header {
 }
 
 #main-header {
-    background-image: url('../images/wedding-selfie-better.jpg');
+    background-image: url('../images/engagement.jpg');
 }
 
 header .header-content {
@@ -201,6 +201,7 @@ header .header-content {
     width: 100%;
     padding: 100px 15px;
     text-align: center;
+    color: rgba(255,255,255);
 }
 
 header .header-content .header-content-inner h1 {
